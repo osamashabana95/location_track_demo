@@ -33,7 +33,7 @@ class LocationTrackingService : Service() {
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + Job())
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000)
+    private val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000)
         .build()
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {

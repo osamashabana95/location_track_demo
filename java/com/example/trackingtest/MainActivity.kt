@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         showButton.setOnClickListener {
             locationViewModel.getLocationCount().observe(this) { count ->
-                if (count <= 2) {
+                if (count <= 1) {
                     Toast.makeText(
                         this,
                         "Not enough location points to show and create track line click track button",
@@ -207,7 +207,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onStart()
         mapView.onStart()
         checkPermissions()
-
+        if (intent?.action == "STOP_TRACKING") {
+            stopTracking()
+        }
 
     }
 
@@ -245,6 +247,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun stopTracking() {
+        sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+
         sharedPreferences.edit().putBoolean("isTracking", false).apply()
 
         val serviceIntent = Intent(this, LocationTrackingService::class.java)

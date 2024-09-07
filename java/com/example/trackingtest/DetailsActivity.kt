@@ -39,14 +39,14 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val polylineOptions = PolylineOptions()
                     .addAll(latLngs)
                     .color(Color.RED)
-                    .width(8.0f)
+                    .width(14.0f)
                 maplibreMap.addPolyline(polylineOptions)
 
                 val boundsBuilder = LatLngBounds.Builder()
                 latLngs.forEach { boundsBuilder.include(it) }
                 val bounds = boundsBuilder.build()
 
-                val padding = 536
+                val padding = 534
                 val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
                 maplibreMap.animateCamera(cameraUpdate)
             }
